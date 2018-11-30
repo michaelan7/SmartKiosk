@@ -2,7 +2,8 @@
 	controllerName="opensap.manageproducts.ManageProducts.controller.Worklist"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic">
+	xmlns:semantic="sap.f.semantic"
+	xmlns:l="sap.ui.layout">
 
 	<semantic:SemanticPage
 		id="page"
@@ -47,6 +48,9 @@
 				</headerToolbar>
 
 				<columns>
+					<Column id="image">
+						<Text text="Product" />
+					</Column>
 					<Column id="nameColumn">
 						<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
 					</Column>
@@ -65,15 +69,16 @@
 						<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
 					</Column>
 				</columns>
-
+				
 				<items>
 					<ColumnListItem
 						type="Navigation"
 						press="onPress">
 						<cells>
+							<Image src="https://www.bigbasket.com/media/uploads/p/s/{ProductImageFileName}" alt="Image"/>
 							<ObjectIdentifier
-								title="{ProductName}"
-								text="{ProductID}"/>
+								title="{ProductName}"/>
+								<!--text="{ProductID}"/>-->
 							<Text text ="{ProductDescription}"/>
 							<Text text="{ProductCategory}"/>
 							<ObjectNumber
