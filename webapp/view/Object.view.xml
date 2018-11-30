@@ -1,0 +1,92 @@
+<mvc:View
+	controllerName="opensap.manageproducts.ManageProducts.controller.Object"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic"
+	xmlns:form="sap.ui.layout.form">
+
+	<semantic:SemanticPage
+		id="page"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false"
+		busy="{objectView>/busy}"
+		busyIndicatorDelay="{objectView>/delay}">
+
+		<semantic:titleHeading>
+			<Title text="{ProductID} {ProductName}" />
+		</semantic:titleHeading>
+
+		<semantic:headerContent>
+			<ObjectNumber
+				number="{
+					path: 'Price',
+					formatter: '.formatter.numberUnit'
+				}"
+				numberUnit="PHP"
+			/>
+		</semantic:headerContent>
+
+		<!--<semantic:sendEmailAction>-->
+		<!--	<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>-->
+		<!--</semantic:sendEmailAction>-->
+
+		<semantic:content>
+		<Panel
+			class="sapUiResponsiveMargin"
+			width="auto"
+			headerText="{Product}"
+			expandable="{device>/system/phone}"
+			expanded="true">
+			<content>
+				<form:SimpleForm id="objectForm">
+					<form:content>
+						<Label text="Product Description"/>
+						<Text text="{ProductDescription}"/>
+						<Label text="Product Category"/>
+						<Text text="{ProductCategory}"/>
+						<!--<Label text="{i18n>productWeightLabel}"/>-->
+						<!--<Text text="{= ${WeightMeasure} + ' ' + ${WeightUnit}}"/>-->
+					</form:content>
+				</form:SimpleForm>
+			</content>
+		</Panel>
+		
+		<!--<Panel-->
+		<!--	class="sapUiResponsiveMargin"-->
+		<!--	width="auto"-->
+		<!--	headerText="{i18n>supplierTitle}"-->
+		<!--	expandable="{device>/system/phone}"-->
+		<!--	expanded="false">-->
+		<!--	<content>-->
+		<!--		<List id="supplierList">-->
+		<!--			<items>-->
+						<!--<StandardListItem icon="sap-icon://building" title="{ToSupplier/CompanyName}"/>-->
+						<!--<StandardListItem icon="sap-icon://email" title="{ToSupplier/EmailAddress}"/>-->
+						<!--<StandardListItem icon="sap-icon://world" title="{ToSupplier/WebAddress}"/>-->
+						<!--<StandardListItem icon="sap-icon://phone" title="{ToSupplier/PhoneNumber}"/>-->
+						<!--<StandardListItem icon="sap-icon://map" title="{ToSupplier/Address/City}"/>-->
+		<!--			</items>-->
+		<!--		</List>-->
+		<!--	</content>-->
+		<!--</Panel>-->
+		
+		<!--<Panel-->
+		<!--	class="sapUiResponsiveMargin"-->
+		<!--	width="auto"-->
+		<!--	headerText="{i18n>mapTitle}">-->
+			<!--<Image src="{-->
+			<!--	parts: [-->
+			<!--		'ToSupplier/Address/Street',-->
+			<!--		'ToSupplier/Address/PostalCode',-->
+			<!--		'ToSupplier/Address/City',-->
+			<!--		'ToSupplier/Address/Country'-->
+			<!--	],-->
+			<!--	formatter: '.formatter.formatMapUrl'-->
+			<!--}" />-->
+		<!--</Panel>-->
+	
+		</semantic:content>
+
+	</semantic:SemanticPage>
+
+</mvc:View>
