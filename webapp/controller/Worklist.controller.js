@@ -4,8 +4,9 @@ sap.ui.define([
 		"sap/ui/model/json/JSONModel",
 		"opensap/manageproducts/ManageProducts/model/formatter",
 		"sap/ui/model/Filter",
-		"sap/ui/model/FilterOperator"
-	], function (BaseController, JSONModel, formatter, Filter, FilterOperator) {
+		"sap/ui/model/FilterOperator",
+		"sap/m/MessageToast"
+	], function (BaseController, JSONModel, formatter, Filter, FilterOperator, MessageToast) {
 		"use strict";
 
 		return BaseController.extend("opensap.manageproducts.ManageProducts.controller.Worklist", {
@@ -61,6 +62,27 @@ sap.ui.define([
 			 */
 			onAdd: function() {
 				this.getRouter().navTo("add");
+			},
+			
+			onAddToCartPressed: function(oEvent){
+				this._sProductId = oEvent.getSource().getBindingContext().getObject().ProductID;
+				
+				// create default properties
+				var oProperties = {
+					OrderID: "OID1234567",
+					ProductID: this._sProductId,
+					TotalQuantity: 1,
+					BarCode: "OID1234567"
+				};
+				
+				// create new entry in the model
+				this.getModel().createEntry("/OrderItem", {
+					properties: oProperties,
+					success: this._onCreateSuccess.bind(this)
+				});
+				
+				// Commit changes to DB
+				this.getModel().submitChanges();
 			},
 
 			/**
@@ -165,6 +187,17 @@ sap.ui.define([
 				if (aTableSearchState.length !== 0) {
 					oViewModel.setProperty("/tableNoDataText", this.getResourceBundle().getText("worklistNoDataWithSearchText"));
 				}
+			},
+			
+			_onCreateSuccess: function (oOrder) {
+
+				// Increment shopping cart count
+				
+				// show success messge
+				var sMessage = this.getResourceBundle().getText("newObjectCreated", [oOrder.OrderID]);
+				MessageToast.show(sMessage, {
+					closeOnBrowserNavigation : false
+				});
 			}
 
 		});

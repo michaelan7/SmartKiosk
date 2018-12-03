@@ -39,7 +39,7 @@ sap.ui.define([
 
 			// create default properties
 			var oProperties = {
-				ProductID: "HT-" + parseInt(Math.random() * 1000000, 7),
+				ProductID: "HT-" + parseInt(Math.random() * 1000000),
 				TypeCode: "PR",
 				TaxTarifCode: 1,
 				CurrencyCode: "PHP",
@@ -68,7 +68,7 @@ sap.ui.define([
 			this.getView().unbindObject();
 			
 			// show success messge
-			var sMessage = this.getResourceBundle().getText("newObjectCreated", [oProduct.Name]);
+			var sMessage = this.getResourceBundle().getText("newObjectCreated", [oProduct.ProductName]);
 			MessageToast.show(sMessage, {
 				closeOnBrowserNavigation : false
 			});

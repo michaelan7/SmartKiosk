@@ -10,10 +10,12 @@
 		headerPinnable="false"
 		toggleHeaderOnTitleClick="false"
 		busy="{objectView>/busy}"
-		busyIndicatorDelay="{objectView>/delay}">
+		busyIndicatorDelay="{objectView>/delay}"
+		showNavButton="true"
+		navButtonPress="onNavBack">
 
 		<semantic:titleHeading>
-			<Title text="{ProductID} {ProductName}" />
+			<Title text="{ProductName}" />
 		</semantic:titleHeading>
 
 		<semantic:headerContent>
@@ -48,6 +50,8 @@
 						<!--<Text text="{= ${WeightMeasure} + ' ' + ${WeightUnit}}"/>-->
 					</form:content>
 				</form:SimpleForm>
+				<Image	src="https://www.bigbasket.com/media/uploads/p/s/{ProductImageFileName}"
+						alt="Image"/>
 			</content>
 		</Panel>
 		

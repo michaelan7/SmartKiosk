@@ -68,6 +68,12 @@
 					<Column id="unitNumberColumn" hAlign="End">
 						<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
 					</Column>
+					<Column id="buttonColumn" width="15%" minScreenWidth="Tablet" demandPopin="true" popinDisplay="WithoutHeader" hAlign="Right"
+						class="sapMTableContentMargin">
+						<header>
+							<Label id="addToCartLabel" text="{i18n>xfld.addToCart}" visible="{= ${device>/system/phone}}"/>
+						</header>
+					</Column>
 				</columns>
 				
 				<items>
@@ -87,6 +93,7 @@
 									formatter: '.formatter.numberUnit'
 								}"
 								unit="PHP"/>
+							<Button id="addToCartButton" text="Add to Cart" press="onAddToCartPressed" type="Transparent"/>
 						</cells>
 					</ColumnListItem>
 				</items>
