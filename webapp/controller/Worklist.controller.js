@@ -66,13 +66,15 @@ sap.ui.define([
 			
 			onAddToCartPressed: function(oEvent){
 				this._sProductId = oEvent.getSource().getBindingContext().getObject().ProductID;
-				
+			
 				// create default properties
 				var oProperties = {
-					OrderID: "OID1234567",
+					OrderID: "OID" + parseInt(Math.random() * 10000000),
 					ProductID: this._sProductId,
 					TotalQuantity: 1,
-					BarCode: "OID1234567"
+					ConsumedQuantity: 0,
+					// ItemStatus: "Cart",
+					BarCode: this._sProductId
 				};
 				
 				// create new entry in the model

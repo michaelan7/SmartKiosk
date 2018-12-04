@@ -39,7 +39,7 @@ sap.ui.define([
 
 			// create default properties
 			var oProperties = {
-				ProductID: "HT-" + parseInt(Math.random() * 1000000),
+				ProductID: "PID" + parseInt(Math.random() * 10000000, 10),
 				TypeCode: "PR",
 				TaxTarifCode: 1,
 				CurrencyCode: "PHP",
