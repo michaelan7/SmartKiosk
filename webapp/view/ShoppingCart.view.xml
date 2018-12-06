@@ -1,0 +1,96 @@
+<mvc:View id="ShoppingCartView" controllerName="opensap.manageproducts.ManageProducts.controller.ShoppingCart" xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:uxap="sap.uxap" xmlns="sap.m">
+	<uxap:ObjectPageLayout id="shoppingCartPage" alwaysShowContentHeader="true" showFooter="true" busy="{shoppingCartView>/busy}"
+		busyIndicatorDelay="0">
+		<uxap:headerTitle>
+			<uxap:ObjectPageHeader id="shoppingCartObjectPageHeader" objectTitle="{i18n>xtit.yourCart}">
+				<uxap:actions>
+					<uxap:ObjectPageHeaderActionButton id="continueShoppingButton" hideText="false" text="{i18n>xbut.continueShopping}"
+						press="onContinueShoppingPressed"/>
+				</uxap:actions>
+			</uxap:ObjectPageHeader>
+		</uxap:headerTitle>
+		<uxap:headerContent id="shoppingCartHeaderContent" binding="{/OrderHeader/0}">
+			<core:Icon id="shoppingCartIcon" height="3rem" size="3rem" src="sap-icon://cart" alt="{i18n>xfld.keyWord2}"/>
+			<l:VerticalLayout id="totalAmount">
+				<Label id="totalAmountLabel" text="{i18n>xtit.totalAmount}"/>
+				<ObjectNumber id="totalObjNumber"
+					number="{parts: [{path: 'TotalPrice'},{path: '/OrderHeader/0/Currency'}], type : 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"
+					unit="{/OrderHeader/0/Currency}"/>
+			</l:VerticalLayout>
+			<l:VerticalLayout id="numberOfItems">
+				<Label id="numberOfItemsLabel" text="{i18n>xtit.numberOfItems}"/>
+				<ObjectNumber id="totalQuantityObjNumber"
+					number="{parts: [{path: '/OrderHeader/0/TotalQuantity'}], type : 'sap.ui.model.type.Integer', formatOptions: { showMeasure: false } }"/>
+			</l:VerticalLayout>
+		</uxap:headerContent>
+		<uxap:sections>
+			<uxap:ObjectPageSection showTitle="false" title="{i18n>xtit.yourCart}" id="yourCart">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection >
+						<uxap:blocks>
+							<Table id="shoppingCartTable" delete="onDeletePressed" growing="true" growingScrollToLoad="true"
+								items="{path: '/OrderItem', templateShareable: false, sorter: { path: 'OrderID', descending: false}, filters : [ {path : 'ItemStatus', operator : 'EQ', value1 : 'CART'} ]}"
+								mode="Delete" noDataText="{i18n>xfld.noDataShoppingCart}" updateFinished="onUpdateFinished"
+								class="sapUiForceWidthAuto sapUiResponsiveMargin" width="auto" ariaLabelledBy="yourCart">
+								<columns>
+									<!-- Picture -->
+									<Column id="pictureColumn" hAlign="Left" width="{= ${device>/system/phone}? '14%' : '11%'}" class="sapMTableContentMargin">
+										<header>
+											<Label id="itemsLabel" text="" visible="false"/>
+										</header>
+									</Column>
+									<!-- Name-->
+									<Column id="productColumn" hAlign="Left" width="28%" class="sapMTableContentMargin">
+										<header>
+											<Label id="productLabel" text="Product" visible="{= !${device>/system/phone}}"/>
+										</header>
+									</Column>
+									<!-- Quantity -->
+									<Column id="quantityColumn" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Block" width="14%"
+										class="sapMTableContentMargin">
+										<header>
+											<Label id="quantityLabel" text="Quantity"/>
+										</header>
+									</Column>
+									<!-- Price -->
+									<Column id="priceColumn" hAlign="Right" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline" width="18%"
+										class="sapMTableContentMargin">
+										<header>
+											<Label id="priceLabel" text="Price"/>
+										</header>
+									</Column>
+								</columns>
+								<ColumnListItem press="onLineItemPressed" type="Navigation" vAlign="Middle">
+									<cells>
+										<!-- Picture -->
+										<l:HorizontalLayout id="pictureLayout">
+											<Image src="https://www.bigbasket.com/media/uploads/p/s/{ProductImageFileName}" alt="Image"/>
+										</l:HorizontalLayout>
+										<!-- Name-->
+										<l:VerticalLayout id="productVerticalLayout" width="100%">
+											<ObjectIdentifier id="productObjectIdentifier" title="{ProductName}"/>
+										</l:VerticalLayout>
+										<!-- Quantity -->
+										<Input id="quantityInput" ariaLabelledBy="quantityLabel" change="onQuantityChanged" maxLength="3" type="Number"
+											value="{path: 'Quantity', type: 'sap.ui.model.type.Integer'}" valueStateText="{i18n>ymsg.errorInvalidNumber}"/>
+										<!-- Price -->
+										<ObjectNumber id="priceObjNumber" emphasized="false"
+											number="{parts: [ {path: 'Price'}, {path: 'Currency'}], type : 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"
+											unit="{Currency}"/>
+									</cells>
+								</ColumnListItem>
+							</Table>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+		</uxap:sections>
+		<uxap:footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button id="checkOutButton" enabled="false" press="onCheckoutButtonPressed" text="{i18n>xbut.goToCheckout}" type="Emphasized"/>
+			</OverflowToolbar>
+		</uxap:footer>
+	</uxap:ObjectPageLayout>
+</mvc:View>

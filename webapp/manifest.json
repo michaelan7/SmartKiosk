@@ -98,34 +98,39 @@
 				},
 				"async": true
 			},
-			"routes": [
-				{
-					"pattern": "",
-					"name": "worklist",
-					"target": [
-						"worklist"
-					]
-				},
-				{
-					"pattern": "ProductSet/{objectId}",
-					"name": "object",
-					"target": [
-						"object"
-					]
-				},
-				{
-					"pattern": "AddProduct",
-					"name": "add",
-					"target": [ "add"
-					]
-				}
-			],
+			"routes": [{
+				"pattern": "",
+				"name": "worklist",
+				"target": [
+					"worklist"
+				]
+			}, {
+				"pattern": "ShoppingCart",
+				"name": "cart",
+				"target": ["cart"]
+			}, {
+				"pattern": "ProductSet/{objectId}",
+				"name": "object",
+				"target": [
+					"object"
+				]
+			}, {
+				"pattern": "AddProduct",
+				"name": "add",
+				"target": ["add"]
+			}],
 			"targets": {
 				"worklist": {
 					"viewName": "Worklist",
 					"viewId": "worklist",
 					"viewLevel": 1,
 					"title": "{i18n>worklistViewTitle}"
+				},
+				"cart": {
+					"viewName": "ShoppingCart",
+					"viewId": "cart",
+					"viewLevel": 2,
+					"title": "{i18n>shoppingCartViewTitle}"
 				},
 				"object": {
 					"viewName": "Object",
